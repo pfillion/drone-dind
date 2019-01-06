@@ -1,0 +1,49 @@
+kind: pipeline
+name: main
+
+workspace:
+  base: /main
+  path: src
+
+steps:
+
+- name: build
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  commands:
+  - apk add make git
+  - make build
+
+- name: push
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  environment:
+    DOCKER_USERNAME:
+      from_secret: docker_username
+    DOCKER_PASSWORD:
+      from_secret: docker_password
+  commands:
+  - apk add make git
+  - make push
+
+- name: notify-microbadger
+  image: plugins/webhook
+  settings:
+    urls:
+      from_secret: webhook_urls
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: docker_volume
+    path: /var/run
+
+volumes:
+- name: docker_volume
+  temp: {}
