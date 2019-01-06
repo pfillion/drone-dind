@@ -30,10 +30,10 @@ endif
 	docker push $(NS)/$(IMAGE_NAME):$(VERSION)
     
 shell: ## Run shell command in the container
-	make docker-start
+	make start
 	docker exec -i -t $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) /bin/sh
-	make docker-stop
-	make docker-rm
+	make stop
+	make rm
 
 start: ## Run the container in background
 	docker run -d --privileged --name $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)
@@ -46,4 +46,4 @@ rm: ## Remove the container
 
 release: ## Build and push the image to a registry
 	make build
-	make docker-push
+	make push
