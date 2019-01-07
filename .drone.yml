@@ -23,7 +23,7 @@ steps:
     path: /var/run
   commands:
   - apk add make git
-  - make start stop
+  - make test
 
 - name: push
   image: docker:dind

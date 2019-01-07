@@ -44,6 +44,11 @@ stop: ## Stop the container
 rm: ## Remove the container
 	docker rm $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
 
+test: ## Run all tests
+	make start
+	docker exec $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) docker version
+	make stop rm
+
 release: ## Build and push the image to a registry
 	make build
 	make push
