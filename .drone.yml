@@ -16,6 +16,15 @@ steps:
   - apk add make git
   - make build
 
+- name: test
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  commands:
+  - apk add make git
+  - make start stop
+
 - name: push
   image: docker:dind
   volumes:
