@@ -4,6 +4,8 @@ FROM docker:18-dind
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
+ARG BATS_VERSION=0.4.0
+
 LABEL \
     org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="Drone-dind" \
@@ -16,7 +18,18 @@ LABEL \
     org.label-schema.schema-version="1.0"
 
 RUN apk add --update --no-cache \
-    git \
-    make
-
-ENTRYPOINT ["dockerd-entrypoint.sh"]
+        git \
+        make \
+        bash \
+    ; \
+    # Install dependencies needed for installing Bats
+    apk add --update --virtual build-dependencies \
+        curl \
+    ; \
+    # Install Bats
+    curl -sSL https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz -o /tmp/bats.tgz; \
+    tar -zxf /tmp/bats.tgz -C /tmp; \
+    /bin/bash /tmp/bats-${BATS_VERSION}/install.sh /usr/local; \
+    # Cleanup
+    rm -rf /tmp/*; \
+    apk del build-dependencies

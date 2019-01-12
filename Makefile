@@ -1,6 +1,5 @@
 SHELL = /bin/sh
 .SUFFIXES:
-.SUFFIXES: .c .o
 .PHONY: help
 .DEFAULT_GOAL := help
 
@@ -29,26 +28,23 @@ ifdef DOCKER_USERNAME
 endif
 	docker push $(NS)/$(IMAGE_NAME):$(VERSION)
     
-shell: ## Run shell command in the container
-	make start
-	docker exec -i -t $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) /bin/sh
-	make stop
-	make rm
+shell: start ## Run shell command in the container
+	docker exec -it $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) /bin/sh
+	$(docker_stop)
 
 start: ## Run the container in background
-	docker run -d --privileged --name $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)
+	docker run -d --rm --privileged --name $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(IMAGE_NAME):$(VERSION)
 
 stop: ## Stop the container
-	docker stop $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
+	$(docker_stop)
 
-rm: ## Remove the container
-	docker rm $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
-
-test: ## Run all tests
-	make start
+test: start ## Run all tests
 	docker exec $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) docker version
-	make stop rm
+	docker exec $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) bats -v
+	$(docker_stop)
 
-release: ## Build and push the image to a registry
-	make build
-	make push
+release: build push ## Build and push the image to a registry
+
+define docker_stop
+	docker stop $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
+endef
