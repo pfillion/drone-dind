@@ -1,0 +1,36 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  labels:
+    - key: 'org.label-schema.build-date'
+      value: '.*'
+      isRegex: true
+    - key: 'org.label-schema.vcs-ref'
+      value: '.*'
+      isRegex: true  
+    - key: 'org.label-schema.version'
+      value: '.*'
+      isRegex: true    
+  exposedPorts: []
+  volumes: []
+  entrypoint: ["dockerd-entrypoint.sh"]
+  cmd: []
+  workdir: ""
+
+commandTests:
+  - name: "git is functional"
+    command: "git"
+    args: ["--version"]
+    expectedOutput: ["git version .*"]
+  - name: "make is functional"
+    command: "make"
+    args: ["-v"]
+    expectedOutput: ["GNU Make .*"]
+  - name: "bash is functional"
+    command: "bash"
+    args: ["--version"]
+    expectedOutput: ["GNU bash,.*"]
+  - name: "bats is functional"
+    command: "bats"
+    args: ["-v"]
+    expectedOutput: ["Bats .*"]
