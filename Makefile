@@ -40,8 +40,6 @@ stop: ## Stop the container
 	$(docker_stop)
 
 test: start ## Run all tests
-	docker exec $(CONTAINER_NAME)-$(CONTAINER_INSTANCE) docker version
-	$(docker_stop)
 	docker run \
 		--rm \
 		-v /var/run/docker.sock:/var/run/docker.sock \

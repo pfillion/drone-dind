@@ -17,6 +17,22 @@ metadataTest:
   cmd: []
   workdir: ""
 
+fileExistenceTests:
+- name: 'container-structure-test'
+  path: '/bin/container-structure-test'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+  uid: 0
+  gid: 0
+  isExecutableBy: 'group'
+- name: 'docker-credential-gcr'
+  path: '/bin/docker-credential-gcr'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+  uid: 0
+  gid: 0
+  isExecutableBy: 'group'
+
 commandTests:
   - name: "git is functional"
     command: "git"
@@ -34,3 +50,7 @@ commandTests:
     command: "bats"
     args: ["-v"]
     expectedOutput: ["Bats .*"]
+  - name: "container-structure-test is functional"
+    command: "container-structure-test"
+    args: ["version"]
+    expectedOutput: ["v.*"]

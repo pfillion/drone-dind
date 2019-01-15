@@ -1,3 +1,5 @@
+FROM gcr.io/gcp-runtimes/container-structure-test:latest as container-structure-test
+
 FROM docker:18-dind
 
 # Build-time metadata as defined at http://label-schema.org
@@ -16,6 +18,8 @@ LABEL \
     org.label-schema.vendor="pfillion" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
+
+ COPY --from=container-structure-test /docker-credential-gcr /container-structure-test ./bin/
 
 RUN apk add --update --no-cache \
         git \
