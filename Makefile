@@ -39,7 +39,7 @@ start: ## Run the container in background
 stop: ## Stop the container
 	$(docker_stop)
 
-test: start ## Run all tests
+test: ## Run all tests
 	docker run \
 		--rm \
 		-v /var/run/docker.sock:/var/run/docker.sock \
