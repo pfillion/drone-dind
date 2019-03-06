@@ -43,11 +43,11 @@ test: ## Run all tests
 	docker run \
 		--rm \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $(ROOT_FOLDER)/tests:/tests \
+		-v $(ROOT_FOLDER)/test:/test \
 		gcr.io/gcp-runtimes/container-structure-test:latest \
 			test \
 			--image $(NS)/$(IMAGE_NAME):$(VERSION) \
-			--config /tests/config.yaml
+			--config /test/config.yaml
 
 release: build push ## Build and push the image to a registry
 
