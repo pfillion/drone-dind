@@ -1,6 +1,6 @@
 FROM gcr.io/gcp-runtimes/container-structure-test:latest as container-structure-test
 
-FROM docker:18-dind
+FROM docker:19-dind
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
