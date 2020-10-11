@@ -1,6 +1,6 @@
-FROM gcr.io/gcp-runtimes/container-structure-test:latest as container-structure-test
+FROM gcr.io/gcp-runtimes/container-structure-test:v1.9.1 as container-structure-test
 
-FROM docker:19-dind
+FROM docker:19.03.13-dind
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -19,7 +19,7 @@ LABEL \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
- COPY --from=container-structure-test /docker-credential-gcr /container-structure-test ./bin/
+COPY --from=container-structure-test /container-structure-test ./bin/
 
 RUN apk add --update --no-cache \
         git \

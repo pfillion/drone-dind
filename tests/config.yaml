@@ -25,13 +25,6 @@ fileExistenceTests:
   uid: 0
   gid: 0
   isExecutableBy: 'group'
-- name: 'docker-credential-gcr'
-  path: '/bin/docker-credential-gcr'
-  shouldExist: true
-  permissions: '-rwxr-xr-x'
-  uid: 0
-  gid: 0
-  isExecutableBy: 'group'
 
 commandTests:
   - name: "git is functional"
