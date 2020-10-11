@@ -1,8 +1,11 @@
 # drone-dind
 
 [![Build Status](https://drone.pfillion.com/api/badges/pfillion/drone-dind/status.svg)](https://drone.pfillion.com/pfillion/drone-dind)
-[![microbadger image](https://images.microbadger.com/badges/image/pfillion/drone-dind.svg)](https://microbadger.com/images/pfillion/drone-dind "Get your own image badge on microbadger.com")
-[![microbadger version](https://images.microbadger.com/badges/version/pfillion/drone-dind.svg)](https://microbadger.com/images/pfillion/drone-dind "Get your own version badge on microbadger.com")
-[![microbadger commit](https://images.microbadger.com/badges/commit/pfillion/drone-dind.svg)](https://microbadger.com/images/pfillion/drone-dind "Get your own commit badge on microbadger.com")
+![GitHub](https://img.shields.io/github/license/pfillion/drone-dind)
+[![GitHub last commit](https://img.shields.io/github/last-commit/pfillion/drone-dind?logo=github)](https://github.com/pfillion/drone-dind "GitHub projet")
+
+[![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/pfillion/drone-dind/latest?logo=docker)](https://hub.docker.com/r/pfillion/drone-dind "Docker Hub Repository")
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/pfillion/drone-dind/latest?logo=docker)](https://hub.docker.com/r/pfillion/drone-dind "Docker Hub Repository")
+[![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/pfillion/drone-dind/latest?logo=docker)](https://microbadger.com/images/pfillion/drone-dind "Get your own commit badge on microbadger.com")
 
 Docker in Docker with more tools for Drone.io
