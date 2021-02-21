@@ -1,13 +1,16 @@
-FROM gcr.io/gcp-runtimes/container-structure-test:v1.9.1 as container-structure-test
+ARG CST_VERSION
+ARG CURRENT_VERSION_MICRO
 
-FROM docker:19.03.13-dind
+FROM gcr.io/gcp-runtimes/container-structure-test:$CST_VERSION as container-structure-test
+
+FROM docker:${CURRENT_VERSION_MICRO}-dind
 
 # Build-time metadata as defined at https://github.com/opencontainers/image-spec
-ARG DATE
 ARG CURRENT_VERSION_MICRO
+ARG DATE
 ARG COMMIT
 ARG AUTHOR
-ARG BATS_VERSION=0.4.0
+ARG BATS_VERSION
 
 LABEL \
     org.opencontainers.image.created=$DATE \

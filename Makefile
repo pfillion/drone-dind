@@ -3,8 +3,12 @@ SHELL = /bin/sh
 .PHONY: help
 .DEFAULT_GOAL := help
 
-# Version
-VERSION            := 19.03.13
+# Tools Version
+BATS_VERSION		:= 0.4.0
+CST_VERSION			:= v1.10.0
+
+# Docker-dind Version
+VERSION            := 20.10.3
 VERSION_PARTS      := $(subst ., ,$(VERSION))
 
 MAJOR              := $(word 1,$(VERSION_PARTS))
@@ -30,6 +34,8 @@ help: ## Show the Makefile help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 version: ## Show all versionning infos
+	@echo BATS_VERSION="$(BATS_VERSION)"
+	@echo CST_VERSION="$(CST_VERSION)"
 	@echo CURRENT_VERSION_MICRO="$(CURRENT_VERSION_MICRO)"
 	@echo CURRENT_VERSION_MINOR="$(CURRENT_VERSION_MINOR)"
 	@echo CURRENT_VERSION_MAJOR="$(CURRENT_VERSION_MAJOR)"
@@ -39,6 +45,8 @@ version: ## Show all versionning infos
 
 build: ## Build the image form Dockerfile
 	docker build \
+		--build-arg BATS_VERSION=$(BATS_VERSION) \
+		--build-arg CST_VERSION=$(CST_VERSION) \
 		--build-arg DATE=$(DATE) \
 		--build-arg CURRENT_VERSION_MICRO=$(CURRENT_VERSION_MICRO) \
 		--build-arg COMMIT=$(COMMIT) \
