@@ -9,7 +9,7 @@ workspace:
 steps:
 
 - name: build
-  image: docker:19.03.15-dind
+  image: docker:19.03.13-dind
   volumes:
   - name: docker_volume
     path: /var/run
@@ -19,7 +19,7 @@ steps:
   - make build
 
 - name: test
-  image: docker:19.03.15-dind
+  image: docker:19.03.13-dind
   volumes:
   - name: docker_volume
     path: /var/run
@@ -28,7 +28,7 @@ steps:
   - make test
 
 - name: push
-  image: docker:19.03.15-dind
+  image: docker:19.03.13-dind
   volumes:
   - name: docker_volume
     path: /var/run
@@ -49,7 +49,7 @@ steps:
 
 services:
 - name: docker
-  image: docker:19.03.15-dind
+  image: docker:19.03.13-dind
   privileged: true
   volumes:
   - name: docker_volume
