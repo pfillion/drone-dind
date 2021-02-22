@@ -9,47 +9,51 @@ workspace:
 steps:
 
 - name: build
-  image: docker:19.03.13-dind
+  image: docker:19.03.15-dind
   volumes:
   - name: docker_volume
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - apk add make git
-  - make build
+  - cat /etc/resolv.conf
+  - nslookup gcr.io
+  - docker pull gcr.io/gcp-runtimes/container-structure-test
+  # - apk add make git
+  # - make build
+  # - docker images
 
-- name: test
-  image: docker:19.03.13-dind
-  volumes:
-  - name: docker_volume
-    path: /var/run
-  commands:
-  - apk add make git
-  - make test
+# - name: test
+#   image: docker:19.03.13-dind
+#   volumes:
+#   - name: docker_volume
+#     path: /var/run
+#   commands:
+#   - apk add make git
+#   - make test
 
-- name: push
-  image: docker:19.03.13-dind
-  volumes:
-  - name: docker_volume
-    path: /var/run
-  environment:
-    DOCKER_USERNAME:
-      from_secret: docker_username
-    DOCKER_PASSWORD:
-      from_secret: docker_password
-  commands:
-  - apk add make git
-  - make push
+# - name: push
+#   image: docker:19.03.13-dind
+#   volumes:
+#   - name: docker_volume
+#     path: /var/run
+#   environment:
+#     DOCKER_USERNAME:
+#       from_secret: docker_username
+#     DOCKER_PASSWORD:
+#       from_secret: docker_password
+#   commands:
+#   - apk add make git
+#   - make push
 
-- name: notify-microbadger
-  image: plugins/webhook
-  settings:
-    urls:
-      from_secret: webhook_urls
+# - name: notify-microbadger
+#   image: plugins/webhook
+#   settings:
+#     urls:
+#       from_secret: webhook_urls
 
 services:
 - name: docker
-  image: docker:19.03.13-dind
+  image: docker:19.03.15-dind
   privileged: true
   volumes:
   - name: docker_volume
