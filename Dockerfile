@@ -1,7 +1,7 @@
-# ARG CST_VERSION
+ARG CST_VERSION
 ARG CURRENT_VERSION_MICRO
 
-# FROM gcr.io/gcp-runtimes/container-structure-test:$CST_VERSION as container-structure-test
+FROM gcr.io/gcp-runtimes/container-structure-test:$CST_VERSION as container-structure-test
 
 FROM docker:${CURRENT_VERSION_MICRO}-dind
 
@@ -24,7 +24,7 @@ LABEL \
     org.opencontainers.image.authors=$AUTHOR \
     org.opencontainers.image.licenses="MIT"
 
-# COPY --from=container-structure-test /container-structure-test ./bin/
+COPY --from=container-structure-test /container-structure-test ./bin/
 
 RUN apk add --update --no-cache \
         git \
