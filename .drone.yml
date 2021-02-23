@@ -9,65 +9,53 @@ workspace:
 steps:
 
 - name: build
-  image: docker:19.03.15-dind
+  image: docker:dind
   volumes:
   - name: docker_volume
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - cat /etc/resolv.conf
-  - nslookup gcr.io
-  - docker pull gcr.io/gcp-runtimes/container-structure-test
-  # dns:
-  # - 8.8.8.8
-  # network_mode: host
-  # - apk add make git
-  # - make build
-  # - docker images
+  - apk add make git
+  - make build
+  - docker images
 
-# - name: test
-#   image: docker:19.03.13-dind
-#   volumes:
-#   - name: docker_volume
-#     path: /var/run
-#   commands:
-#   - apk add make git
-#   - make test
-
-# - name: push
-#   image: docker:19.03.13-dind
-#   volumes:
-#   - name: docker_volume
-#     path: /var/run
-#   environment:
-#     DOCKER_USERNAME:
-#       from_secret: docker_username
-#     DOCKER_PASSWORD:
-#       from_secret: docker_password
-#   commands:
-#   - apk add make git
-#   - make push
-
-# - name: notify-microbadger
-#   image: plugins/webhook
-#   settings:
-#     urls:
-#       from_secret: webhook_urls
-
-services:
-- name: docker
-  image: docker:19.03.15-dind
-  privileged: true
-  # dns:
-  # - 8.8.8.8
-  network_mode: overlay
+- name: test
+  image: docker:dind
   volumes:
   - name: docker_volume
     path: /var/run
-  # commands:
-  # - sleep 5 # give docker enough time to start
-  # - cat /etc/resolv.conf
-  # - nslookup gcr.io
+  commands:
+  - apk add make git
+  - make test
+
+- name: push
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  environment:
+    DOCKER_USERNAME:
+      from_secret: docker_username
+    DOCKER_PASSWORD:
+      from_secret: docker_password
+  commands:
+  - apk add make git
+  - make push
+
+- name: notify-microbadger
+  image: plugins/webhook
+  settings:
+    urls:
+      from_secret: webhook_urls
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  network_mode: bridge
+  volumes:
+  - name: docker_volume
+    path: /var/run
 
 volumes:
 - name: docker_volume

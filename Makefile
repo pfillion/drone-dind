@@ -8,7 +8,7 @@ BATS_VERSION		:= 0.4.0
 CST_VERSION			:= v1.10.0
 
 # Docker-dind Version
-VERSION            := 19.03.15
+VERSION            := 20.10.3
 VERSION_PARTS      := $(subst ., ,$(VERSION))
 
 MAJOR              := $(word 1,$(VERSION_PARTS))
