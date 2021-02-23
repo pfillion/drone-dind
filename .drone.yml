@@ -18,11 +18,11 @@ steps:
   - cat /etc/resolv.conf
   - nslookup gcr.io
   - docker pull gcr.io/gcp-runtimes/container-structure-test
+  dns:
+  - 8.8.8.8
   # - apk add make git
   # - make build
   # - docker images
-  dns:
-    - 8.8.8.8
 
 # - name: test
 #   image: docker:19.03.13-dind
@@ -57,11 +57,11 @@ services:
 - name: docker
   image: docker:19.03.15-dind
   privileged: true
+  dns:
+  - 8.8.8.8
   volumes:
   - name: docker_volume
     path: /var/run
-  dns:
-    - 8.8.8.8
 
 volumes:
 - name: docker_volume
