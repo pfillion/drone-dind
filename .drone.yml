@@ -21,6 +21,8 @@ steps:
   # - apk add make git
   # - make build
   # - docker images
+  dns:
+    - 8.8.8.8
 
 # - name: test
 #   image: docker:19.03.13-dind
