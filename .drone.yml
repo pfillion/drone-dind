@@ -58,6 +58,8 @@ services:
   volumes:
   - name: docker_volume
     path: /var/run
+  dns:
+    - 8.8.8.8
 
 volumes:
 - name: docker_volume
