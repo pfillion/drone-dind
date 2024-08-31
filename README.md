@@ -6,6 +6,5 @@
 
 [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/pfillion/drone-dind/latest?logo=docker)](https://hub.docker.com/r/pfillion/drone-dind "Docker Hub Repository")
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/pfillion/drone-dind/latest?logo=docker)](https://hub.docker.com/r/pfillion/drone-dind "Docker Hub Repository")
-[![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/pfillion/drone-dind/latest?logo=docker)](https://microbadger.com/images/pfillion/drone-dind "Get your own commit badge on microbadger.com")
 
 Docker in Docker with more tools for Drone.io
