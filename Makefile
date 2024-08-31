@@ -4,11 +4,11 @@ SHELL = /bin/sh
 .DEFAULT_GOAL := help
 
 # Tools Version
-BATS_VERSION		:= 0.4.0
-CST_VERSION			:= v1.10.0
+BATS_VERSION		:= 1.10.0
+CST_VERSION			:= 1.16.0
 
 # Docker-dind Version
-VERSION            := 20.10.3
+VERSION            := 27.2.0
 VERSION_PARTS      := $(subst ., ,$(VERSION))
 
 MAJOR              := $(word 1,$(VERSION_PARTS))

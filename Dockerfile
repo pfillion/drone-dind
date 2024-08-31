@@ -1,7 +1,7 @@
 ARG CST_VERSION
 ARG CURRENT_VERSION_MICRO
 
-FROM gcr.io/gcp-runtimes/container-structure-test:$CST_VERSION as container-structure-test
+FROM gcr.io/gcp-runtimes/container-structure-test:v$CST_VERSION as container-structure-test
 
 FROM docker:${CURRENT_VERSION_MICRO}-dind
 
@@ -30,15 +30,5 @@ RUN apk add --update --no-cache \
         git \
         make \
         bash \
+        bats \
     ; \
-    # Install dependencies needed for installing Bats
-    apk add --update --virtual build-dependencies \
-        curl \
-    ; \
-    # Install Bats
-    curl -sSL https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz -o /tmp/bats.tgz; \
-    tar -zxf /tmp/bats.tgz -C /tmp; \
-    /bin/bash /tmp/bats-${BATS_VERSION}/install.sh /usr/local; \
-    # Cleanup
-    rm -rf /tmp/*; \
-    apk del build-dependencies
