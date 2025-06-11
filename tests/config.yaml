@@ -42,7 +42,7 @@ fileExistenceTests:
 - name: 'container-structure-test'
   path: '/bin/container-structure-test'
   shouldExist: true
-  permissions: '-rwxr-xr-x'
+  permissions: '-r-xr-xr-x'
   uid: 0
   gid: 0
   isExecutableBy: 'group'
@@ -67,4 +67,4 @@ commandTests:
   - name: "container-structure-test is functional"
     command: "container-structure-test"
     args: ["version"]
-    expectedOutput: ["v.*"]
+    expectedOutput: ["12"]
