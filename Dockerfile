@@ -1,7 +1,7 @@
 ARG CST_VERSION
 ARG CURRENT_VERSION_MICRO
 
-FROM ghcr.io/googlecontainertools/container-structure-test:$CST_VERSION as container-structure-test
+FROM ghcr.io/googlecontainertools/container-structure-test:$CST_VERSION AS container-structure-test
 
 FROM docker:${CURRENT_VERSION_MICRO}-dind
 
